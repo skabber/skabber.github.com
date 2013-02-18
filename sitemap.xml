@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://skabber.github.com/360idevmin-presentation/</loc>
+        <lastmod>2013-02-17T00:59:16-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://skabber.github.com/blog/archives/</loc>
-        <lastmod>2013-02-17T00:29:36-07:00</lastmod>
+        <lastmod>2013-02-17T00:59:16-07:00</lastmod>
     </url>
     <url>
         <loc>http://skabber.github.com/</loc>
-        <lastmod>2013-02-17T00:29:36-07:00</lastmod>
+        <lastmod>2013-02-17T00:59:16-07:00</lastmod>
     </url>
     <url>
         <loc>http://skabber.github.com/robots.txt</loc>
