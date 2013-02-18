@@ -4,7 +4,7 @@
   <title><![CDATA[skabber]]></title>
   <link href="http://skabber.github.com/atom.xml" rel="self"/>
   <link href="http://skabber.github.com/"/>
-  <updated>2013-02-17T20:50:53-07:00</updated>
+  <updated>2013-02-17T22:26:22-07:00</updated>
   <id>http://skabber.github.com/</id>
   <author>
     <name><![CDATA[Jay Graves]]></name>
@@ -31,6 +31,341 @@
 
 
 <p>Here are the <a href="https://skabber.snipt.net/provisioning-profile-tips-tricks/">handy openssl commands</a>.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Provisioning Profile Tips &amp; Tricks]]></title>
+    <link href="http://skabber.github.com/provisioning-profile-tips-and-tricks/"/>
+    <updated>2012-12-10T00:42:00-07:00</updated>
+    <id>http://skabber.github.com/provisioning-profile-tips-and-tricks</id>
+    <content type="html"><![CDATA[<p>Use this command to verify a .mobileprovision file and output its contents.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>openssl smime -in /path/to/your.mobileprovision -inform der -verify</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you are on Linux you may not have Apples Cert installed into openssl so you can use</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>openssl smime -in /path/to/your.mobileprovision -inform der -verify -noverify</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Use the latest version of Clang]]></title>
+    <link href="http://skabber.github.com/use-the-latest-version-of-clang/"/>
+    <updated>2012-06-04T07:47:00-06:00</updated>
+    <id>http://skabber.github.com/use-the-latest-version-of-clang</id>
+    <content type="html"><![CDATA[<p><strong>Update</strong> <em>You must use an absolute path in step 3 or you could get a <a href="http://blog.hyperjeff.net/code?id=334">crash</a>. Thanks <a href="https://twitter.com/#!/hyperjeff">@hyperjeff</a></em></p>
+
+
+
+
+<p>At the time of this writing the latest version of <a href="http://itunes.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a> (4.3.2) was released on March 22nd 2012. The latest version of <a href="http://clang-analyzer.llvm.org/">Clang</a> (267) was released on June 1 2012. There have been 4 updates to Clang since Xcode 4.3.2 has shipped and those updates fix bugs and add better support for blocks. See the <a href="http://clang-analyzer.llvm.org/release_notes.html">Clang release notes</a>.</p>
+
+
+
+
+<p>It is really easy to take advantage of these updates on your development machine or on your build servers.</p>
+
+
+
+
+<h2>On your local development machine</h2>
+
+
+
+
+<ol>
+<li>Download Clang <code>curl -L http://bit.ly/LU4IZJ -o clang.tar.bz2</code></li>
+<li>Untar it <code>tar -jxvf clang.tar.bz2</code></li>
+<li>Tell Xcode about the updated Clang <code>sudo ./checker-267/set-xcode-analyzer --use-checker-build=$ABSOLUTE_PATH_TO_CLANG</code></li>
+</ol>
+
+
+
+
+<p>Now Xcode will use this updated version of Clang instead of the built in version. If you ever want to change back you run <code>sudo ./checker-267/set-xcode-analyzer --use-xcode-clang</code></p>
+
+
+
+
+<h2>On your build servers</h2>
+
+
+
+
+<p>The Jenkins <a href="https://wiki.jenkins-ci.org/display/JENKINS/Clang+Scan-Build+Plugin">Clang Scan-Build Plugin</a> has settings that define where Clang lives outside of Xcode. I install Clang in <code>/usr/local/bin/checker</code></p>
+
+
+
+
+<p><img src="http://f.cl.ly/items/1W3P420H2Q3k2H413h1D/Screen%20Shot%202012-06-01%20at%205.18.53%20PM.png" alt="Clang Scan-Build Plugin Settings" /></p>
+
+
+
+
+<p>With all that done you can now enjoy the benefits of the most up to date static code analysis.</p>
+
+
+
+
+<p>Also, I love the graphs that the Clang Scan-Build Plugin creates <img src="http://f.cl.ly/items/28473r241g0b1b2O2s1b/Screen%20Shot%202012-06-01%20at%205.31.19%20PM.png" alt="" /></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Reverse Proxy on OS X Server for Jenkins &amp; Github]]></title>
+    <link href="http://skabber.github.com/reverse-proxy-on-os-x-server-for-jenkins-and-github/"/>
+    <updated>2012-05-14T15:00:00-06:00</updated>
+    <id>http://skabber.github.com/reverse-proxy-on-os-x-server-for-jenkins-and-github</id>
+    <content type="html"><![CDATA[<p>When I first started using Jenkins with Github I was using scm polling to check github for changes. This is bad, there is a much better way. Have github tell you when changes have been pushed via a Service Hook. The problem is that your Jenkins might be behind a private network. The solution is to use a Reverse Proxy.</p>
+
+<p>Setting up a Reverse Proxy on OS X Lion is easy.</p>
+
+<ol>
+<li>Download <a href="http://cl.ly/Gcc1">jenkinsProxy.plist</a></li>
+<li>Modify the url to your local Jenkins server</li>
+<li>Move <code>jenkinsProxy.plist</code> into <code>/etc/apache2/webapps/</code></li>
+<li>Run <code>sudo webappctl start org.jenkins.proxy</code></li>
+<li>Point the Github Jenkins Service Hook <a href="found">^fn</a>  to your external IP/Domain Name /github-webhook</li>
+</ol>
+
+
+<p>And you&#8217;re done. Every push to your github repo will ping your local Jenkins server to check for updates.
+<img src="http://f.cl.ly/items/141O3B3j3V111u2n1Z0A/Screen%20Shot%202012-05-14%20at%204.01.41%20PM.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NSBrief Interview]]></title>
+    <link href="http://skabber.github.com/nsbrief-interview/"/>
+    <updated>2012-03-19T10:03:00-06:00</updated>
+    <id>http://skabber.github.com/nsbrief-interview</id>
+    <content type="html"><![CDATA[<p>Recently I was interviewed by Saul Mora over at the NSBrief Podcast. You should got check it out.</p>
+
+
+<p><a href="http://nsbrief.com/38-jay-graves">http://nsbrief.com/38-jay-graves</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Sharing Services]]></title>
+    <link href="http://skabber.github.com/ios-sharing-services/"/>
+    <updated>2012-02-24T08:10:00-07:00</updated>
+    <id>http://skabber.github.com/ios-sharing-services</id>
+    <content type="html"><![CDATA[<p>Ole Begemann has a nice post on <a href="http://oleb.net/blog/2012/02/what-ios-should-learn-from-android-and-windows-8/" title="What iOS Should Learn from Android and Windows 8">What iOS Should Learn from Android and Windows 8</a>. Specifically the post is about how Android, Windows 8 and iOS implement the sharing of things. The short version is that both Android and Windows 8 include a generic way to share things between applications and iOS has a very specific few ways to share only certain things.</p>
+
+
+<p>There has been a lot of &#8220;Back to the Mac&#8221; talk in the last year however I think iOS could take a page from the Mac in this scenario. OS X has had the ability to share different types of media between applications using what are called <a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/SysServices/introduction.html" title="Services">Services</a>. You can probably find Services on your machine right now. Just select an image file in the Finder and then click Finder -&gt; Services from the Menu. This is what mine looks like<div class='p_embed p_image_embed'>
+<a href="http://getfile0.posterous.com/getfile/files.posterous.com/temp-2012-02-23/DdJvkGffowduJEAoFlfeolvhoEyoxvmehtDuniCrnpkIvCvHcybEDeocnqhw/Services_Example.png.scaled1000.png"><img alt="Services_example" height="250" src="http://getfile1.posterous.com/getfile/files.posterous.com/temp-2012-02-23/DdJvkGffowduJEAoFlfeolvhoEyoxvmehtDuniCrnpkIvCvHcybEDeocnqhw/Services_Example.png.scaled500.png" width="500" /></a>
+</div>
+Take for example that &#8220;Upload with CloudApp&#8221;. The Cloud.app on my machine has registered a Service with the OS that accepts an image file.There are even more Services installed for sharing a URL<div class='p_embed p_image_embed'>
+<a href="http://getfile6.posterous.com/getfile/files.posterous.com/temp-2012-02-23/siHBsFpjtEAJtnamAAtkJkgCCgJcffusogHeHpiqdHgCImJxnhlCIHolmlbg/Services_URL_Example.png.scaled1000.png"><img alt="Services_url_example" height="315" src="http://getfile6.posterous.com/getfile/files.posterous.com/temp-2012-02-23/siHBsFpjtEAJtnamAAtkJkgCCgJcffusogHeHpiqdHgCImJxnhlCIHolmlbg/Services_URL_Example.png.scaled500.png" width="500" /></a>
+</div>
+Check out that Tweet Service. Thats provided by the official Twitter.app. It&#8217;s like a Twitter Share Sheet right here in OS X Lion.</p>
+
+
+<p><strong>The Technical Details</strong></p>
+
+
+<p>Applications can register the Services they support by declaring them in the Info.plist. Lets go back to Twitter.app and see what that declaration looks like.</p>
+
+
+<script src="https://gist.github.com/1898380.js?file=gistfile1.xml"></script>
+
+
+<p>All this boils down to mean any selected text is sent to the Twitter.app tweetService method as a NSString from the Pasteboard. This is what the method signature of that Service probably looks like in thw Twitter.app AppDelegate</p>
+
+
+<div class="CodeRay">
+  <div class="code"><pre>- (void)tweetService:(NSPasteboard *)pboard userData:(NSString *)userData error:(NSString **)error;</pre></div>
+</div>
+
+
+
+
+<p><strong>What if iOS had this?</strong></p>
+
+
+<p>Imagine if you could share a photo you took in <a href="http://campl.us/" title="Camera+">Camera+</a> with <a href="https://path.com/" title="Path">Path</a> without having to first save it to the Camera Roll and do a bunch of App Switching. The flow would go like this.</p>
+
+
+<ol>
+<li>Path registers a Service in it&#8217;s Info.plist telling iOS that it supports image files.</li>
+<li>Camera+ tells iOS it has an image to share.</li>
+<li>iOS presents a list op App Services that support image files.</li>
+<li>The user selectes a the Path App Service.</li>
+<li>Path is launched with the image data passed to it&#8217;s Service method that was registered in step #1.</li>
+</ol>
+
+
+<p>If that sounds a bit like D&eacute;j&agrave; vu, it&#8217;s because it&#8217;s very similar to how iOS already supports Documents.<div class='p_embed p_image_embed'>
+<img alt="Photo_feb_23_10_33_52_pm" height="480" src="http://getfile0.posterous.com/getfile/files.posterous.com/temp-2012-02-23/GecqAJmyoFnJbspltfBrbzsrulonrjrqAzddwdjGGggEmmtJjdEkprHIJDIp/Photo_Feb_23_10_33_52_PM.png.scaled500.png" width="320" />
+</div>
+</p>
+
+
+<p><strong>Does iOS already have this?</strong></p>
+
+
+<p>One of the things Apple touted about iOS 5 was that it had some new &#8220;System Wide Services&#8221; including Dictionary lookup provided by iBooks. This iOS 5 preview from <a href="http://www.macworld.com/article/160322/2011/06/ios5.html" title="Macworld">Macworld</a> references it.<div class='p_embed p_image_embed'>
+<a href="http://getfile0.posterous.com/getfile/files.posterous.com/temp-2012-02-23/JfEzyugarbDrHnmdfnGpJDImamqDIxohClfvjkHkCHDrHGBnnImhHwFfunjI/Dictionary_Service.png.scaled1000.png"><img alt="Dictionary_service" height="250" src="http://getfile9.posterous.com/getfile/files.posterous.com/temp-2012-02-23/JfEzyugarbDrHnmdfnGpJDImamqDIxohClfvjkHkCHDrHGBnnImhHwFfunjI/Dictionary_Service.png.scaled500.png" width="500" /></a>
+</div>
+</p>
+
+
+<p>I don&#8217;t see anything Service related in the iBooks Info.plist. That doesn&#8217;t mean that the frameworks to support this doesn&#8217;t already exist. Maybe it&#8217;s just not exposed to us yet.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Install a certificate via the command line.]]></title>
+    <link href="http://skabber.github.com/install-a-certificate-via-the-command-line/"/>
+    <updated>2012-01-10T22:02:00-07:00</updated>
+    <id>http://skabber.github.com/install-a-certificate-via-the-command-line</id>
+    <content type="html"><![CDATA[<p>If you ever need to install a certificate into the OS X Keychain on a remote machine in such a way that Xcode can sign a build with it, then this command is for you.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>security import /tmp/MyCertificates.p12 -k $HOME /Library/Keychains/login.keychain -P MyPassword -T /usr/bin/codesign</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This allows you to not get that annoying &#8220;Always Allow&#8221; dialog the first time you try to use the cert to sign a build.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Package your iOS application with xcrun]]></title>
+    <link href="http://skabber.github.com/package-your-ios-application-with-xcrun/"/>
+    <updated>2011-11-21T17:35:00-07:00</updated>
+    <id>http://skabber.github.com/package-your-ios-application-with-xcrun</id>
+    <content type="html"><![CDATA[<p>I have updated my example over the air distribution script to use &#8220;xcrun PackageApplication&#8221; instead of manually creating the Payload directory and zipping that.</p>
+
+
+<p>This allows you to use the same flow to package and sign your application that Xcode does. It also allows you to choose the signing certificate and provisioning profile completely separate from what was defined in the Xcode project.</p>
+
+
+<p>You can see how to use &#8220;xcrun PackageApplication&#8221; here</p>
+
+
+<p><p><a href="https://gist.github.com/1385007">https://gist.github.com/1385007</a></p></p>
+
+
+<p>Thanks to <a href="http://blog.octo.com/en/automating-over-the-air-deployment-for-iphone/">blog.octo.com</a> for finding this.&nbsp;</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OTA Distribution and Build Automation]]></title>
+    <link href="http://skabber.github.com/ota-distribution-and-build-automation/"/>
+    <updated>2011-09-13T08:43:00-06:00</updated>
+    <id>http://skabber.github.com/ota-distribution-and-build-automation</id>
+    <content type="html"><![CDATA[<p>Here are the scripts and slides from my 360iDev presentation on Over the Air distribution and Build Automation.</p>
+
+
+<p><p><a href="https://gist.github.com/1212193">https://gist.github.com/1212193</a></p></p>
+
+
+<p><p><a href="https://gist.github.com/1213826">https://gist.github.com/1213826</a></p></p>
+
+
+<div style=""><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/skabber/360idev-ota-distribution-and-build-automation" title="360iDev OTA Distribution and Build Automation" target="_blank">360iDev OTA Distribution and Build Automation</a></strong> <iframe scrolling="no" marginheight="0" marginwidth="0" src="http://www.slideshare.net/slideshow/embed_code/9242798" frameborder="0" height="355" width="425"></iframe>
+<div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/skabber" target="_blank">Jay Graves</a></div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to use Keygrinder]]></title>
+    <link href="http://skabber.github.com/how-to-use-keygrinder/"/>
+    <updated>2011-06-04T07:24:00-06:00</updated>
+    <id>http://skabber.github.com/how-to-use-keygrinder</id>
+    <content type="html"><![CDATA[<p>Every so often I get an email like this &#8220;How do I use KeyGrinder?&#8221;. This is a fair question. KeyGrinder does not do a very good job of teaching people how to use it. I always figured that if people didn&#8217;t know about PwdHash they wouldn&#8217;t even bother to download it. However it turns out that there are people out there hungry for better password security and are seeking something to help them.</p>
+
+
+
+
+<p>This post is for them.</p>
+
+
+<p>KeyGrinder uses the <a href="http://crypto.stanford.edu/PwdHash/" title="Stanford PwdHash">Stanford PwdHash</a>&nbsp;algorithm to mix together a URL domain and a master password to come up with a strong password that is unique to that domain.</p>
+
+
+<p>For example the domain &#8220;http://twitter.com&#8221; plus a master password of &#8220;prettybird&#8221; gives us a PwdHash of &#8220;n2A0x64KS1BC&#8221;.</p>
+
+
+<p>The domain &#8220;http://facebook.com&#8221; plus a master password of &#8220;prettybird&#8221; gives us a PwdHash of &#8220;lYuZHW5JZHM3&#8221;.</p>
+
+
+<p>Thats the same master password used at a different domain giving us a completely different password.&nbsp;If you are the type of user that uses the same password for most of your online logins, KeyGrinder allows you to have a unique strong password for every website you use.&nbsp;Simply change your passwords on the sites you visit to the ones generated by KeyGrinder and you are good to go.</p>
+
+
+
+
+<p>The KeyGrinder iOS and Mac apps allow you to enter in your domain and master password and then copy the resulting PwdHash into your clipboard, ready for you to paste into whatever web site or app you are logging into. If you are away from your devices or are using a computer that does not have KeyGrinder installed you can always use <a href="http://keygrinder.com/" title="KeyGrinder">KeyGrinder.com</a>&nbsp;to get your password.</p>
+
+
+<p>KeyGrinder iOS is available in the <a href="http://itunes.apple.com/us/app/keygrinder/id354763605?mt=8" title="KeyGrinder iOS">App Store</a>.</p>
+
+
+<p><div class='p_embed p_image_embed'>
+<img alt="Kgphoto_s" height="480" src="http://getfile7.posterous.com/getfile/files.posterous.com/temp-2011-06-04/CBCvzjmexDrFtDrCcqvmoamcfzdBIDADHzeImmlgoGoHBcICrtCpsaGBlacv/kgphoto_s.png.scaled500.png" width="320" />
+</div>
+</p>
+
+
+<p>KeyGrinder Mac is available in the <a href="http://itunes.apple.com/us/app/keygrinder/id415600108?mt=12" title="KeyGrinder Mac">Mac App Store</a>.<div class='p_embed p_image_embed'>
+<a href="http://getfile0.posterous.com/getfile/files.posterous.com/temp-2011-06-04/IAfConfmhhymkJBrccfszDAHewrGkvGBlfuwAzDuopdDpjpaiwaydbcfAtEj/kgmac.png.scaled1000.png"><img alt="Kgmac" height="287" src="http://getfile4.posterous.com/getfile/files.posterous.com/temp-2011-06-04/IAfConfmhhymkJBrccfszDAHewrGkvGBlfuwAzDuopdDpjpaiwaydbcfAtEj/kgmac.png.scaled500.png" width="500" /></a>
+</div>
+</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I love my birthday cake from the Double Encore crew]]></title>
+    <link href="http://skabber.github.com/i-love-my-birthday-cake-from-the-double-encore-crew/"/>
+    <updated>2011-03-24T13:43:00-06:00</updated>
+    <id>http://skabber.github.com/i-love-my-birthday-cake-from-the-double-encore-crew</id>
+    <content type="html"><![CDATA[<p><img src="http://f.cl.ly/items/0l1z063Q0V223O060C2Z/23556966-p53.jpg"/></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS universal app to device specific app.]]></title>
+    <link href="http://skabber.github.com/ios-universal-app-to-device-specific-app/"/>
+    <updated>2011-02-27T21:04:00-07:00</updated>
+    <id>http://skabber.github.com/ios-universal-app-to-device-specific-app</id>
+    <content type="html"><![CDATA[<p>I recently had the need to deuniversalify an iOS app. This is a simple process but it took me longer than anticipated to find the right change to make. &nbsp;At first I thought it would be as simple as changing the&nbsp;<a href="http://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/uid/TP40009252-SW11" title="UIDeviceFamily">UIDeviceFamily</a>&nbsp;from &#8220;iPhone/iPad&#8221; back to &#8220;iPhone&#8221;. &nbsp;That had no effect on the how the binary ran on the iPad. &nbsp;The iPad still ran the iPad specific code.</p>
+
+
+<p><a href="http://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/uid/TP40009252-SW11" title="UIDeviceFamily"><div class='p_embed p_image_embed'>
+<a href="http://getfile7.posterous.com/getfile/files.posterous.com/temp-2011-02-27/foeDpsfHhfvoBkpCpdhwAGfdzrebfhAimIbIHejarrvziinsaxphiaooHHAw/XcodeScreenSnapz004.png.scaled1000.png"><img alt="Xcodescreensnapz004" height="105" src="http://getfile6.posterous.com/getfile/files.posterous.com/temp-2011-02-27/foeDpsfHhfvoBkpCpdhwAGfdzrebfhAimIbIHejarrvziinsaxphiaooHHAw/XcodeScreenSnapz004.png.scaled500.png" width="500" /></a>
+</div>
+</a></p>
+
+
+<p>I had to remove the <a href="http://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW9" title="Creating device-specific keys">NSMainNibFile~iPad</a>&nbsp;and make sure that NSMainNibFile was pointing to the iPhone specific .xib.</p>
+
+
+<p><a href="http://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/uid/TP40009252-SW11" title="UIDeviceFamily"><div class='p_embed p_image_embed'>
+<img alt="Xcodescreensnapz005" height="49" src="http://getfile1.posterous.com/getfile/files.posterous.com/temp-2011-02-27/lClcnFkfbrmktrHdDDeEwAJqDlopmkzolGtntcvrrthuIkFJygGpcEiqijJx/XcodeScreenSnapz005.png.scaled500.png" width="488" />
+</div>
+</a></p>
+
+
+<p>Then the app ran on the iPad using the iPhone screen size, exactly what I was after.</p>
+
+
+<p>At the time of this writing, Google returns no results for &#8220;deuniversalify&#8221;. That means I invented it :)</p>
 
 ]]></content>
   </entry>

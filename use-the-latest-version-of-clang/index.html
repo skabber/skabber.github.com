@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: iOS - skabber</title>
+  <title>Use the latest version of Clang - skabber</title>
   <meta name="author" content="Jay Graves">
 
   
-  <meta name="description" content="Category: iOS">
+  <meta name="description" content="Update You must use an absolute path in step 3 or you could get a crash. Thanks @hyperjeff At the time of this writing the latest version of Xcode (4 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://skabber.github.com/blog/categories/ios/">
+  <link rel="canonical" href="http://skabber.github.com/use-the-latest-version-of-clang/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,111 +63,145 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: iOS</h1>
+    
+      <h1 class="entry-title">Use the Latest Version of Clang</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-04T07:47:00-06:00" pubdate data-updated="true">Jun 4<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
+
+
+<div class="entry-content"><p><strong>Update</strong> <em>You must use an absolute path in step 3 or you could get a <a href="http://blog.hyperjeff.net/code?id=334">crash</a>. Thanks <a href="https://twitter.com/#!/hyperjeff">@hyperjeff</a></em></p>
 
 
 
-  
-  <h2>2013</h2>
 
-<article>
-  
-<h1><a href="/360idevmin-presentation/">360iDevMin Presentation</a></h1>
-<time datetime="2013-02-17T00:57:00-07:00" pubdate><span class='month'>Feb</span> <span class='day'>17</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/provisioning/'>Provisioning</a>, <a class='category' href='/blog/categories/slides/'>Slides</a>, <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
-
-
-</article>
+<p>At the time of this writing the latest version of <a href="http://itunes.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a> (4.3.2) was released on March 22nd 2012. The latest version of <a href="http://clang-analyzer.llvm.org/">Clang</a> (267) was released on June 1 2012. There have been 4 updates to Clang since Xcode 4.3.2 has shipped and those updates fix bugs and add better support for blocks. See the <a href="http://clang-analyzer.llvm.org/release_notes.html">Clang release notes</a>.</p>
 
 
 
-  
-  <h2>2012</h2>
 
-<article>
-  
-<h1><a href="/provisioning-profile-tips-and-tricks/">Provisioning Profile Tips &amp; Tricks</a></h1>
-<time datetime="2012-12-10T00:42:00-07:00" pubdate><span class='month'>Dec</span> <span class='day'>10</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/provisioning/'>Provisioning</a>, <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
-
-
-</article>
+<p>It is really easy to take advantage of these updates on your development machine or on your build servers.</p>
 
 
 
-<article>
-  
-<h1><a href="/ios-sharing-services/">iOS Sharing Services</a></h1>
-<time datetime="2012-02-24T08:10:00-07:00" pubdate><span class='month'>Feb</span> <span class='day'>24</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
-
-
-</article>
+<h2>On your local development machine</h2>
 
 
 
-  
-  <h2>2011</h2>
 
-<article>
-  
-<h1><a href="/package-your-ios-application-with-xcrun/">Package your iOS application with xcrun</a></h1>
-<time datetime="2011-11-21T17:35:00-07:00" pubdate><span class='month'>Nov</span> <span class='day'>21</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/xcode/'>Xcode</a>, <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
-
-
-</article>
+<ol>
+<li>Download Clang <code>curl -L http://bit.ly/LU4IZJ -o clang.tar.bz2</code></li>
+<li>Untar it <code>tar -jxvf clang.tar.bz2</code></li>
+<li>Tell Xcode about the updated Clang <code>sudo ./checker-267/set-xcode-analyzer --use-checker-build=$ABSOLUTE_PATH_TO_CLANG</code></li>
+</ol>
 
 
 
-<article>
-  
-<h1><a href="/how-to-use-keygrinder/">How to use Keygrinder</a></h1>
-<time datetime="2011-06-04T07:24:00-06:00" pubdate><span class='month'>Jun</span> <span class='day'>04</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/keygrinder/'>Keygrinder</a>, <a class='category' href='/blog/categories/os-x/'>OS X</a>, <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
-
-
-</article>
+<p>Now Xcode will use this updated version of Clang instead of the built in version. If you ever want to change back you run <code>sudo ./checker-267/set-xcode-analyzer --use-xcode-clang</code></p>
 
 
 
-<article>
-  
-<h1><a href="/ios-universal-app-to-device-specific-app/">iOS universal app to device specific app.</a></h1>
-<time datetime="2011-02-27T21:04:00-07:00" pubdate><span class='month'>Feb</span> <span class='day'>27</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/xcode/'>Xcode</a>, <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
+<h2>On your build servers</h2>
 
 
-</article>
+
+
+<p>The Jenkins <a href="https://wiki.jenkins-ci.org/display/JENKINS/Clang+Scan-Build+Plugin">Clang Scan-Build Plugin</a> has settings that define where Clang lives outside of Xcode. I install Clang in <code>/usr/local/bin/checker</code></p>
+
+
+
+
+<p><img src="http://f.cl.ly/items/1W3P420H2Q3k2H413h1D/Screen%20Shot%202012-06-01%20at%205.18.53%20PM.png" alt="Clang Scan-Build Plugin Settings" /></p>
+
+
+
+
+<p>With all that done you can now enjoy the benefits of the most up to date static code analysis.</p>
+
+
+
+
+<p>Also, I love the graphs that the Clang Scan-Build Plugin creates <img src="http://f.cl.ly/items/28473r241g0b1b2O2s1b/Screen%20Shot%202012-06-01%20at%205.31.19%20PM.png" alt="" /></p>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Jay Graves</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-04T07:47:00-06:00" pubdate data-updated="true">Jun 4<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/xcode/'>Xcode</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://skabber.github.com/use-the-latest-version-of-clang/" data-via="skabber" data-counturl="http://skabber.github.com/use-the-latest-version-of-clang/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/reverse-proxy-on-os-x-server-for-jenkins-and-github/" title="Previous Post: Reverse Proxy on OS X Server for Jenkins &amp; Github">&laquo; Reverse Proxy on OS X Server for Jenkins &amp; Github</a>
+      
+      
+        <a class="basic-alignment right" href="/provisioning-profile-tips-and-tricks/" title="Next Post: Provisioning Profile Tips &amp; Tricks">Provisioning Profile Tips &amp; Tricks &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>

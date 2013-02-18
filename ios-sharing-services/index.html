@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS Sharing Services - skabber</title>
+  <meta name="author" content="Jay Graves">
+
+  
+  <meta name="description" content="Ole Begemann has a nice post on What iOS Should Learn from Android and Windows 8. Specifically the post is about how Android, Windows 8 and iOS &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://skabber.github.com/ios-sharing-services/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="skabber" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">skabber</a></h1>
+  
+    <h2>Jay Graves</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:skabber.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS Sharing Services</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-24T08:10:00-07:00" pubdate data-updated="true">Feb 24<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Ole Begemann has a nice post on <a href="http://oleb.net/blog/2012/02/what-ios-should-learn-from-android-and-windows-8/" title="What iOS Should Learn from Android and Windows 8">What iOS Should Learn from Android and Windows 8</a>. Specifically the post is about how Android, Windows 8 and iOS implement the sharing of things. The short version is that both Android and Windows 8 include a generic way to share things between applications and iOS has a very specific few ways to share only certain things.</p>
+
+
+<p>There has been a lot of &#8220;Back to the Mac&#8221; talk in the last year however I think iOS could take a page from the Mac in this scenario. OS X has had the ability to share different types of media between applications using what are called <a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/SysServices/introduction.html" title="Services">Services</a>. You can probably find Services on your machine right now. Just select an image file in the Finder and then click Finder -&gt; Services from the Menu. This is what mine looks like<div class='p_embed p_image_embed'>
+<a href="http://getfile0.posterous.com/getfile/files.posterous.com/temp-2012-02-23/DdJvkGffowduJEAoFlfeolvhoEyoxvmehtDuniCrnpkIvCvHcybEDeocnqhw/Services_Example.png.scaled1000.png"><img alt="Services_example" height="250" src="http://getfile1.posterous.com/getfile/files.posterous.com/temp-2012-02-23/DdJvkGffowduJEAoFlfeolvhoEyoxvmehtDuniCrnpkIvCvHcybEDeocnqhw/Services_Example.png.scaled500.png" width="500" /></a>
+</div>
+Take for example that &#8220;Upload with CloudApp&#8221;. The Cloud.app on my machine has registered a Service with the OS that accepts an image file.There are even more Services installed for sharing a URL<div class='p_embed p_image_embed'>
+<a href="http://getfile6.posterous.com/getfile/files.posterous.com/temp-2012-02-23/siHBsFpjtEAJtnamAAtkJkgCCgJcffusogHeHpiqdHgCImJxnhlCIHolmlbg/Services_URL_Example.png.scaled1000.png"><img alt="Services_url_example" height="315" src="http://getfile6.posterous.com/getfile/files.posterous.com/temp-2012-02-23/siHBsFpjtEAJtnamAAtkJkgCCgJcffusogHeHpiqdHgCImJxnhlCIHolmlbg/Services_URL_Example.png.scaled500.png" width="500" /></a>
+</div>
+Check out that Tweet Service. Thats provided by the official Twitter.app. It&#8217;s like a Twitter Share Sheet right here in OS X Lion.</p>
+
+
+<p><strong>The Technical Details</strong></p>
+
+
+<p>Applications can register the Services they support by declaring them in the Info.plist. Lets go back to Twitter.app and see what that declaration looks like.</p>
+
+
+<script src="https://gist.github.com/1898380.js?file=gistfile1.xml"></script>
+
+
+<p>All this boils down to mean any selected text is sent to the Twitter.app tweetService method as a NSString from the Pasteboard. This is what the method signature of that Service probably looks like in thw Twitter.app AppDelegate</p>
+
+
+<div class="CodeRay">
+  <div class="code"><pre>- (void)tweetService:(NSPasteboard *)pboard userData:(NSString *)userData error:(NSString **)error;</pre></div>
+</div>
+
+
+
+
+<p><strong>What if iOS had this?</strong></p>
+
+
+<p>Imagine if you could share a photo you took in <a href="http://campl.us/" title="Camera+">Camera+</a> with <a href="https://path.com/" title="Path">Path</a> without having to first save it to the Camera Roll and do a bunch of App Switching. The flow would go like this.</p>
+
+
+<ol>
+<li>Path registers a Service in it&#8217;s Info.plist telling iOS that it supports image files.</li>
+<li>Camera+ tells iOS it has an image to share.</li>
+<li>iOS presents a list op App Services that support image files.</li>
+<li>The user selectes a the Path App Service.</li>
+<li>Path is launched with the image data passed to it&#8217;s Service method that was registered in step #1.</li>
+</ol>
+
+
+<p>If that sounds a bit like D&eacute;j&agrave; vu, it&#8217;s because it&#8217;s very similar to how iOS already supports Documents.<div class='p_embed p_image_embed'>
+<img alt="Photo_feb_23_10_33_52_pm" height="480" src="http://getfile0.posterous.com/getfile/files.posterous.com/temp-2012-02-23/GecqAJmyoFnJbspltfBrbzsrulonrjrqAzddwdjGGggEmmtJjdEkprHIJDIp/Photo_Feb_23_10_33_52_PM.png.scaled500.png" width="320" />
+</div>
+</p>
+
+
+<p><strong>Does iOS already have this?</strong></p>
+
+
+<p>One of the things Apple touted about iOS 5 was that it had some new &#8220;System Wide Services&#8221; including Dictionary lookup provided by iBooks. This iOS 5 preview from <a href="http://www.macworld.com/article/160322/2011/06/ios5.html" title="Macworld">Macworld</a> references it.<div class='p_embed p_image_embed'>
+<a href="http://getfile0.posterous.com/getfile/files.posterous.com/temp-2012-02-23/JfEzyugarbDrHnmdfnGpJDImamqDIxohClfvjkHkCHDrHGBnnImhHwFfunjI/Dictionary_Service.png.scaled1000.png"><img alt="Dictionary_service" height="250" src="http://getfile9.posterous.com/getfile/files.posterous.com/temp-2012-02-23/JfEzyugarbDrHnmdfnGpJDImamqDIxohClfvjkHkCHDrHGBnnImhHwFfunjI/Dictionary_Service.png.scaled500.png" width="500" /></a>
+</div>
+</p>
+
+
+<p>I don&#8217;t see anything Service related in the iBooks Info.plist. That doesn&#8217;t mean that the frameworks to support this doesn&#8217;t already exist. Maybe it&#8217;s just not exposed to us yet.</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jay Graves</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-24T08:10:00-07:00" pubdate data-updated="true">Feb 24<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://skabber.github.com/ios-sharing-services/" data-via="skabber" data-counturl="http://skabber.github.com/ios-sharing-services/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/install-a-certificate-via-the-command-line/" title="Previous Post: Install a certificate via the command line.">&laquo; Install a certificate via the command line.</a>
+      
+      
+        <a class="basic-alignment right" href="/nsbrief-interview/" title="Next Post: NSBrief Interview">NSBrief Interview &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/360idevmin-presentation/">360iDevMin Presentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/provisioning-profile-tips-and-tricks/">Provisioning Profile Tips &amp; Tricks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-the-latest-version-of-clang/">Use the latest version of Clang</a>
+      </li>
+    
+      <li class="post">
+        <a href="/reverse-proxy-on-os-x-server-for-jenkins-and-github/">Reverse Proxy on OS X Server for Jenkins &amp; Github</a>
+      </li>
+    
+      <li class="post">
+        <a href="/nsbrief-interview/">NSBrief Interview</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("skabber", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/skabber" class="twitter-follow-button" data-show-count="false">Follow @skabber</a>
+  
+</section>
+
+
+<section>
+  <h1>My Pinboard</h1>
+  <ul id="pinboard_linkroll">Fetching linkroll...</ul>
+  <p><a href="http://pinboard.in/u:Skabber">My Pinboard Bookmarks &raquo;</a></p>
+</section>
+<script type="text/javascript">
+  var linkroll = 'pinboard_linkroll'; //id target for pinboard list
+  var pinboard_user = "Skabber"; //id target for pinboard list
+  var pinboard_count = 3; //id target for pinboard list
+  (function(){
+    var pinboardInit = document.createElement('script');
+    pinboardInit.type = 'text/javascript';
+    pinboardInit.async = true;
+    pinboardInit.src = '/javascripts/pinboard.js';
+    document.getElementsByTagName('head')[0].appendChild(pinboardInit);
+  })();
+</script>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jay Graves -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

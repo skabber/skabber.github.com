@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Slides | skabber]]></title>
+  <link href="http://skabber.github.com/blog/categories/slides/atom.xml" rel="self"/>
+  <link href="http://skabber.github.com/"/>
+  <updated>2013-02-17T22:26:22-07:00</updated>
+  <id>http://skabber.github.com/</id>
+  <author>
+    <name><![CDATA[Jay Graves]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[360iDevMin Presentation]]></title>
+    <link href="http://skabber.github.com/360idevmin-presentation/"/>
+    <updated>2013-02-17T00:57:00-07:00</updated>
+    <id>http://skabber.github.com/360idevmin-presentation</id>
+    <content type="html"><![CDATA[<p>I have made the slides from my 360iDevMin presentation available.</p>
+
+
+<p><iframe width="427" height="356" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" src="http://www.slideshare.net/slideshow/embed_code/16384527"> </iframe></p>
+
+
+<div style="margin-bottom: 5px;"><strong> <a title="Advanced App Building - Tips, Tricks &amp; Lessons Learned" href="http://www.slideshare.net/skabber/advanced-app-building" target="_blank">Advanced App Building - Tips, Tricks &amp; Lessons Learned</a> </strong> from <strong><a href="http://www.slideshare.net/skabber" target="_blank">Jay Graves</a></strong></div>
+
+
+<p>You can also find the Automator Service at <a href="http://cl.ly/MTZb">cl.ly/MTZb</a>.</p>
+
+
+<p>Here are the <a href="https://skabber.snipt.net/provisioning-profile-tips-tricks/">handy openssl commands</a>.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OTA Distribution and Build Automation]]></title>
+    <link href="http://skabber.github.com/ota-distribution-and-build-automation/"/>
+    <updated>2011-09-13T08:43:00-06:00</updated>
+    <id>http://skabber.github.com/ota-distribution-and-build-automation</id>
+    <content type="html"><![CDATA[<p>Here are the scripts and slides from my 360iDev presentation on Over the Air distribution and Build Automation.</p>
+
+
+<p><p><a href="https://gist.github.com/1212193">https://gist.github.com/1212193</a></p></p>
+
+
+<p><p><a href="https://gist.github.com/1213826">https://gist.github.com/1213826</a></p></p>
+
+
+<div style=""><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/skabber/360idev-ota-distribution-and-build-automation" title="360iDev OTA Distribution and Build Automation" target="_blank">360iDev OTA Distribution and Build Automation</a></strong> <iframe scrolling="no" marginheight="0" marginwidth="0" src="http://www.slideshare.net/slideshow/embed_code/9242798" frameborder="0" height="355" width="425"></iframe>
+<div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/skabber" target="_blank">Jay Graves</a></div>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

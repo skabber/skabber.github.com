@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Xcode | skabber]]></title>
+  <link href="http://skabber.github.com/blog/categories/xcode/atom.xml" rel="self"/>
+  <link href="http://skabber.github.com/"/>
+  <updated>2013-02-17T22:26:22-07:00</updated>
+  <id>http://skabber.github.com/</id>
+  <author>
+    <name><![CDATA[Jay Graves]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Use the latest version of Clang]]></title>
+    <link href="http://skabber.github.com/use-the-latest-version-of-clang/"/>
+    <updated>2012-06-04T07:47:00-06:00</updated>
+    <id>http://skabber.github.com/use-the-latest-version-of-clang</id>
+    <content type="html"><![CDATA[<p><strong>Update</strong> <em>You must use an absolute path in step 3 or you could get a <a href="http://blog.hyperjeff.net/code?id=334">crash</a>. Thanks <a href="https://twitter.com/#!/hyperjeff">@hyperjeff</a></em></p>
+
+
+
+
+<p>At the time of this writing the latest version of <a href="http://itunes.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a> (4.3.2) was released on March 22nd 2012. The latest version of <a href="http://clang-analyzer.llvm.org/">Clang</a> (267) was released on June 1 2012. There have been 4 updates to Clang since Xcode 4.3.2 has shipped and those updates fix bugs and add better support for blocks. See the <a href="http://clang-analyzer.llvm.org/release_notes.html">Clang release notes</a>.</p>
+
+
+
+
+<p>It is really easy to take advantage of these updates on your development machine or on your build servers.</p>
+
+
+
+
+<h2>On your local development machine</h2>
+
+
+
+
+<ol>
+<li>Download Clang <code>curl -L http://bit.ly/LU4IZJ -o clang.tar.bz2</code></li>
+<li>Untar it <code>tar -jxvf clang.tar.bz2</code></li>
+<li>Tell Xcode about the updated Clang <code>sudo ./checker-267/set-xcode-analyzer --use-checker-build=$ABSOLUTE_PATH_TO_CLANG</code></li>
+</ol>
+
+
+
+
+<p>Now Xcode will use this updated version of Clang instead of the built in version. If you ever want to change back you run <code>sudo ./checker-267/set-xcode-analyzer --use-xcode-clang</code></p>
+
+
+
+
+<h2>On your build servers</h2>
+
+
+
+
+<p>The Jenkins <a href="https://wiki.jenkins-ci.org/display/JENKINS/Clang+Scan-Build+Plugin">Clang Scan-Build Plugin</a> has settings that define where Clang lives outside of Xcode. I install Clang in <code>/usr/local/bin/checker</code></p>
+
+
+
+
+<p><img src="http://f.cl.ly/items/1W3P420H2Q3k2H413h1D/Screen%20Shot%202012-06-01%20at%205.18.53%20PM.png" alt="Clang Scan-Build Plugin Settings" /></p>
+
+
+
+
+<p>With all that done you can now enjoy the benefits of the most up to date static code analysis.</p>
+
+
+
+
+<p>Also, I love the graphs that the Clang Scan-Build Plugin creates <img src="http://f.cl.ly/items/28473r241g0b1b2O2s1b/Screen%20Shot%202012-06-01%20at%205.31.19%20PM.png" alt="" /></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Package your iOS application with xcrun]]></title>
+    <link href="http://skabber.github.com/package-your-ios-application-with-xcrun/"/>
+    <updated>2011-11-21T17:35:00-07:00</updated>
+    <id>http://skabber.github.com/package-your-ios-application-with-xcrun</id>
+    <content type="html"><![CDATA[<p>I have updated my example over the air distribution script to use "xcrun PackageApplication" instead of manually creating the Payload directory and zipping that.</p>
+
+
+<p>This allows you to use the same flow to package and sign your application that Xcode does. It also allows you to choose the signing certificate and provisioning profile completely separate from what was defined in the Xcode project.</p>
+
+
+<p>You can see how to use "xcrun PackageApplication" here</p>
+
+
+<p><p><a href="https://gist.github.com/1385007">https://gist.github.com/1385007</a></p></p>
+
+
+<p>Thanks to <a href="http://blog.octo.com/en/automating-over-the-air-deployment-for-iphone/">blog.octo.com</a> for finding this.&nbsp;</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS universal app to device specific app.]]></title>
+    <link href="http://skabber.github.com/ios-universal-app-to-device-specific-app/"/>
+    <updated>2011-02-27T21:04:00-07:00</updated>
+    <id>http://skabber.github.com/ios-universal-app-to-device-specific-app</id>
+    <content type="html"><![CDATA[<p>I recently had the need to deuniversalify an iOS app. This is a simple process but it took me longer than anticipated to find the right change to make. &nbsp;At first I thought it would be as simple as changing the&nbsp;<a href="http://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/uid/TP40009252-SW11" title="UIDeviceFamily">UIDeviceFamily</a>&nbsp;from "iPhone/iPad" back to "iPhone". &nbsp;That had no effect on the how the binary ran on the iPad. &nbsp;The iPad still ran the iPad specific code.</p>
+
+
+<p><a href="http://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/uid/TP40009252-SW11" title="UIDeviceFamily"><div class='p_embed p_image_embed'>
+<a href="http://getfile7.posterous.com/getfile/files.posterous.com/temp-2011-02-27/foeDpsfHhfvoBkpCpdhwAGfdzrebfhAimIbIHejarrvziinsaxphiaooHHAw/XcodeScreenSnapz004.png.scaled1000.png"><img alt="Xcodescreensnapz004" height="105" src="http://getfile6.posterous.com/getfile/files.posterous.com/temp-2011-02-27/foeDpsfHhfvoBkpCpdhwAGfdzrebfhAimIbIHejarrvziinsaxphiaooHHAw/XcodeScreenSnapz004.png.scaled500.png" width="500" /></a>
+</div>
+</a></p>
+
+
+<p>I had to remove the <a href="http://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW9" title="Creating device-specific keys">NSMainNibFile~iPad</a>&nbsp;and make sure that NSMainNibFile was pointing to the iPhone specific .xib.</p>
+
+
+<p><a href="http://developer.apple.com/library/ios/documentation/general/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/uid/TP40009252-SW11" title="UIDeviceFamily"><div class='p_embed p_image_embed'>
+<img alt="Xcodescreensnapz005" height="49" src="http://getfile1.posterous.com/getfile/files.posterous.com/temp-2011-02-27/lClcnFkfbrmktrHdDDeEwAJqDlopmkzolGtntcvrrthuIkFJygGpcEiqijJx/XcodeScreenSnapz005.png.scaled500.png" width="488" />
+</div>
+</a></p>
+
+
+<p>Then the app ran on the iPad using the iPhone screen size, exactly what I was after.</p>
+
+
+<p>At the time of this writing, Google returns no results for "deuniversalify". That means I invented it :)</p>
+
+]]></content>
+  </entry>
+  
+</feed>

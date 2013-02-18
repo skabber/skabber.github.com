@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Provisioning | skabber]]></title>
+  <link href="http://skabber.github.com/blog/categories/provisioning/atom.xml" rel="self"/>
+  <link href="http://skabber.github.com/"/>
+  <updated>2013-02-17T22:26:22-07:00</updated>
+  <id>http://skabber.github.com/</id>
+  <author>
+    <name><![CDATA[Jay Graves]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[360iDevMin Presentation]]></title>
+    <link href="http://skabber.github.com/360idevmin-presentation/"/>
+    <updated>2013-02-17T00:57:00-07:00</updated>
+    <id>http://skabber.github.com/360idevmin-presentation</id>
+    <content type="html"><![CDATA[<p>I have made the slides from my 360iDevMin presentation available.</p>
+
+
+<p><iframe width="427" height="356" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" src="http://www.slideshare.net/slideshow/embed_code/16384527"> </iframe></p>
+
+
+<div style="margin-bottom: 5px;"><strong> <a title="Advanced App Building - Tips, Tricks &amp; Lessons Learned" href="http://www.slideshare.net/skabber/advanced-app-building" target="_blank">Advanced App Building - Tips, Tricks &amp; Lessons Learned</a> </strong> from <strong><a href="http://www.slideshare.net/skabber" target="_blank">Jay Graves</a></strong></div>
+
+
+<p>You can also find the Automator Service at <a href="http://cl.ly/MTZb">cl.ly/MTZb</a>.</p>
+
+
+<p>Here are the <a href="https://skabber.snipt.net/provisioning-profile-tips-tricks/">handy openssl commands</a>.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Provisioning Profile Tips &amp; Tricks]]></title>
+    <link href="http://skabber.github.com/provisioning-profile-tips-and-tricks/"/>
+    <updated>2012-12-10T00:42:00-07:00</updated>
+    <id>http://skabber.github.com/provisioning-profile-tips-and-tricks</id>
+    <content type="html"><![CDATA[<p>Use this command to verify a .mobileprovision file and output its contents.
+<code>
+openssl smime -in /path/to/your.mobileprovision -inform der -verify
+</code>
+If you are on Linux you may not have Apples Cert installed into openssl so you can use
+<code>
+openssl smime -in /path/to/your.mobileprovision -inform der -verify -noverify
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

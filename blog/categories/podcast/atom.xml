@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Podcast | skabber]]></title>
+  <link href="http://skabber.github.com/blog/categories/podcast/atom.xml" rel="self"/>
+  <link href="http://skabber.github.com/"/>
+  <updated>2013-02-17T22:26:22-07:00</updated>
+  <id>http://skabber.github.com/</id>
+  <author>
+    <name><![CDATA[Jay Graves]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[NSBrief Interview]]></title>
+    <link href="http://skabber.github.com/nsbrief-interview/"/>
+    <updated>2012-03-19T10:03:00-06:00</updated>
+    <id>http://skabber.github.com/nsbrief-interview</id>
+    <content type="html"><![CDATA[<p>Recently I was interviewed by Saul Mora over at the NSBrief Podcast. You should got check it out.</p>
+
+
+<p><a href="http://nsbrief.com/38-jay-graves">http://nsbrief.com/38-jay-graves</a></p>
+
+]]></content>
+  </entry>
+  
+</feed>

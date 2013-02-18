@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Github | skabber]]></title>
+  <link href="http://skabber.github.com/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://skabber.github.com/"/>
+  <updated>2013-02-17T22:26:22-07:00</updated>
+  <id>http://skabber.github.com/</id>
+  <author>
+    <name><![CDATA[Jay Graves]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Reverse Proxy on OS X Server for Jenkins &amp; Github]]></title>
+    <link href="http://skabber.github.com/reverse-proxy-on-os-x-server-for-jenkins-and-github/"/>
+    <updated>2012-05-14T15:00:00-06:00</updated>
+    <id>http://skabber.github.com/reverse-proxy-on-os-x-server-for-jenkins-and-github</id>
+    <content type="html"><![CDATA[<p>When I first started using Jenkins with Github I was using scm polling to check github for changes. This is bad, there is a much better way. Have github tell you when changes have been pushed via a Service Hook. The problem is that your Jenkins might be behind a private network. The solution is to use a Reverse Proxy.</p>
+
+<p>Setting up a Reverse Proxy on OS X Lion is easy.</p>
+
+<ol>
+<li>Download <a href="http://cl.ly/Gcc1">jenkinsProxy.plist</a></li>
+<li>Modify the url to your local Jenkins server</li>
+<li>Move <code>jenkinsProxy.plist</code> into <code>/etc/apache2/webapps/</code></li>
+<li>Run <code>sudo webappctl start org.jenkins.proxy</code></li>
+<li>Point the Github Jenkins Service Hook <a href="found">^fn</a>  to your external IP/Domain Name /github-webhook</li>
+</ol>
+
+
+<p>And you're done. Every push to your github repo will ping your local Jenkins server to check for updates.
+<img src="http://f.cl.ly/items/141O3B3j3V111u2n1Z0A/Screen%20Shot%202012-05-14%20at%204.01.41%20PM.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+</feed>

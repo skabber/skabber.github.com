@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Photo | skabber]]></title>
+  <link href="http://skabber.github.com/blog/categories/photo/atom.xml" rel="self"/>
+  <link href="http://skabber.github.com/"/>
+  <updated>2013-02-17T22:26:22-07:00</updated>
+  <id>http://skabber.github.com/</id>
+  <author>
+    <name><![CDATA[Jay Graves]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I love my birthday cake from the Double Encore crew]]></title>
+    <link href="http://skabber.github.com/i-love-my-birthday-cake-from-the-double-encore-crew/"/>
+    <updated>2011-03-24T13:43:00-06:00</updated>
+    <id>http://skabber.github.com/i-love-my-birthday-cake-from-the-double-encore-crew</id>
+    <content type="html"><![CDATA[<p><img src="http://f.cl.ly/items/0l1z063Q0V223O060C2Z/23556966-p53.jpg"/></p>
+]]></content>
+  </entry>
+  
+</feed>

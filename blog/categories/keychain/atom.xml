@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Keychain | skabber]]></title>
+  <link href="http://skabber.github.com/blog/categories/keychain/atom.xml" rel="self"/>
+  <link href="http://skabber.github.com/"/>
+  <updated>2013-02-17T22:26:22-07:00</updated>
+  <id>http://skabber.github.com/</id>
+  <author>
+    <name><![CDATA[Jay Graves]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install a certificate via the command line.]]></title>
+    <link href="http://skabber.github.com/install-a-certificate-via-the-command-line/"/>
+    <updated>2012-01-10T22:02:00-07:00</updated>
+    <id>http://skabber.github.com/install-a-certificate-via-the-command-line</id>
+    <content type="html"><![CDATA[<p>If you ever need to install a certificate into the OS X Keychain on a remote machine in such a way that Xcode can sign a build with it, then this command is for you.
+<code>
+security import /tmp/MyCertificates.p12 -k $HOME /Library/Keychains/login.keychain -P MyPassword -T /usr/bin/codesign
+</code>
+This allows you to not get that annoying "Always Allow" dialog the first time you try to use the cert to sign a build.</p>
+]]></content>
+  </entry>
+  
+</feed>
