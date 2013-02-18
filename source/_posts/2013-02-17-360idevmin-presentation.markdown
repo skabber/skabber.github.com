@@ -3,7 +3,7 @@ layout: post
 title: "360iDevMin Presentation"
 date: 2013-02-17 00:57
 comments: true
-categories: iOS
+categories: [iOS, Provisioning, Slides]
 ---
 
 <p>I have made the slides from my 360iDevMin presentation available.</p>
