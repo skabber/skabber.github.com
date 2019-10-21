@@ -7,7 +7,7 @@ group :development do
   gem 'rdiscount', '~> 1.6.8'
   gem 'pygments.rb', '~> 0.3.4'
   gem 'RedCloth', '~> 4.2.9'
-  gem 'haml', '~> 3.1.7'
+  gem 'haml', '~> 5.0.0'
   gem 'compass', '~> 0.12.2'
   gem 'rubypants', '~> 0.2.0'
   gem 'rb-fsevent', '~> 0.9'
