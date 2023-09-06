@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://www.skabber.com"
+base_url = "https://skabber.github.io/"
 
 theme = "particle-zola"
 
