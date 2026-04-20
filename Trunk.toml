@@ -1,0 +1,4 @@
+# Use the nix-shell-provided wasm-bindgen-cli; don't download one.
+# Downloaded GitHub-release binaries won't run on NixOS.
+[tools]
+wasm-bindgen = { version = "0.2.114", path = "wasm-bindgen" }
